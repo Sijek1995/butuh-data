@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirim Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #25D366;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .logo p {
+            color: #667;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #25D366;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 18px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn:active {
+            transform: translateY(0);
+        }
+        
+        .info-box {
+            background: #f0f9ff;
+            border-left: 4px solid #25D366;
+            padding: 15px;
+            margin-top: 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .info-box strong {
+            color: #25D366;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #888;
+        }
+        
+        .step.active {
+            background: #25D366;
+            color: white;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .logo h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1> Setup</h1>
+            <p>Isi data </p>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step active">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="namaBengkel">1. Nama Bengkel:</label>
+            <input type="text" id="namaBengkel" placeholder="Contoh: BENGKEL AC SEJAHTERA">
+        </div>
+        
+        <div class="form-group">
+            <label for="nomorWhatsApp">2. Nomor WhatsApp Admin/Teknisi:</label>
+            <input type="tel" id="nomorWhatsApp" placeholder="Contoh: 628123456789 (tanpa +)">
+        </div>
+        
+        <div class="form-group">
+            <label for="emailBengkel">3. Email Bengkel:</label>
+            <input type="email" id="emailBengkel" placeholder="Contoh: bengkelac@gmail.com">
+        </div>
+        
+        <div class="form-group">
+            <label for="alamatBengkel">4. Alamat Bengkel:</label>
+            <input type="text" id="alamatBengkel" placeholder="Contoh: Jl. Contoh No. 123, Jakarta">
+        </div>
+        
+        <div class="form-group">
+            <label for="namaPemilik">5. Nama Pemilik:</label>
+            <input type="text" id="namaPemilik" placeholder="Contoh: Bapak Budi">
+        </div>
+        
+        <button class="whatsapp-btn" onclick="kirimKeWhatsApp()">
+            <span>📤</span> Kirim ke WhatsApp
+        </button>
+        
+        <div class="info-box">
+            <strong>📋 Cara Pakai:</strong><br>
+            1. Isi semua data di atas<br>
+            2. Klik tombol "Kirim ke WhatsApp"<br>
+            
+        </div>
+    </div>
+
+    <script>
+        function kirimKeWhatsApp() {
+            // Ambil data dari form
+            const namaBengkel = document.getElementById('namaBengkel').value.trim();
+            const nomorWhatsApp = document.getElementById('nomorWhatsApp').value.trim();
+            const emailBengkel = document.getElementById('emailBengkel').value.trim();
+            const alamatBengkel = document.getElementById('alamatBengkel').value.trim();
+            const namaPemilik = document.getElementById('namaPemilik').value.trim();
+            
+            // Validasi
+            if (!namaBengkel || !nomorWhatsApp || !emailBengkel || !alamatBengkel || !namaPemilik) {
+                alert('Harap isi semua data terlebih dahulu!');
+                return;
+            }
+            
+            // Format pesan WhatsApp
+            const pesan = `📋 DATA BENGKEL AC 
+
+1. Nama Bengkel: ${namaBengkel}
+2. Nomor WhatsApp Admin/Teknisi: ${nomorWhatsApp}
+3. Email Bengkel: ${emailBengkel}
+4. Alamat Bengkel: ${alamatBengkel}
+5. Nama Pemilik: ${namaPemilik}
+
+
+📅 *TANGGAL REQUEST:* ${new Date().toLocaleDateString('id-ID')}
+⏰ *WAKTU:* ${new Date().toLocaleTimeString('id-ID')}
+
+_Data setup._`;
+            
+            // Encode pesan untuk URL
+            const pesanEncoded = encodeURIComponent(pesan);
+            
+            // Nomor developer (ganti dengan nomor kamu jika mau)
+            const nomorDeveloper = "6285710877613"; // GANTI DENGAN NOMOR KAMU
+            
+            // Buat URL WhatsApp
+            const whatsappUrl = `https://wa.me/${nomorDeveloper}?text=${pesanEncoded}`;
+            
+            // Buka WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Tampilkan konfirmasi
+            alert('WhatsApp akan terbuka. Kirim pesan ini ke developer untuk setup website!');
+        }
+        
+        // Auto-focus ke input pertama
+        document.getElementById('namaBengkel').focus();
+        
+        // Enter untuk next field
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    } else {
+                        kirimKeWhatsApp();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
